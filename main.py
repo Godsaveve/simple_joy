@@ -1,8 +1,10 @@
 import requests
-import lxml
 from bs4 import BeautifulSoup
 import re
 from requests.api import get
+from flask import Flask,  render_template
+app = Flask(__name__)
+
 
 
 def search_tags(search):#поиск тегов
@@ -27,7 +29,7 @@ def pages_list(link): # количество страниц
     else:
         return int(page_num)
 
-def get_pic_links(link,number_pages = 1):# получение ссылок на картинки с одной страницы
+def get_pic_links(link):# получение ссылок на картинки с одной страницы
     html_doc = requests.get(link)
     soup = BeautifulSoup(html_doc.text, "html.parser")
     quotes = soup.find_all('div', class_="image")
@@ -48,13 +50,14 @@ def get_pic_links_pages(link,pages_count=2):
 
 def post_pic(link):
     pic_list = get_pic_links(link)
-    s = len(link)
-    links = []
-    return links
+    r = 5
+    return pic_list[r]
 
-pic = 'http://joyreactor.cc/'
-p = post_pic(pic)
-for i in range(0,len(p)):
-    print(p[i])
-print(len(p))
 
+
+@app.route('/')
+
+def index():
+    return render_template('index.html')
+if __name__ == '__main__':
+    app.run()
