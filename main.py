@@ -37,6 +37,14 @@ def get_pic_links(link,number_pages = 1):# получение ссылок на 
            pic_link.append(quotes[i].img['src'])
     return pic_link
 
+def get_pic_links_pages(link,pages_count=2):
+    pl = pages_list(link)
+    pic_link = []
+    for i in  range(0,pages_count):
+        page = str(pl-i)
+        link_new = link+page
+        pic_link = pic_link + get_pic_links(link_new)
+    return pic_link
 
 def post_pic(link):
     pic_list = get_pic_links(link)
@@ -47,4 +55,6 @@ def post_pic(link):
 pic = 'http://joyreactor.cc/'
 p = post_pic(pic)
 for i in range(0,len(p)):
-    print(p[0])
+    print(p[i])
+print(len(p))
+
