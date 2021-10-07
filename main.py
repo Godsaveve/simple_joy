@@ -42,10 +42,6 @@ def post_pic(link):
     pic_list = get_pic_links(link)
     s = len(link)
     links = []
-    for i in range(1, 3):
-        ist = str(i)
-        pic_list = get_pic_links(link + ist)
-        links.append(pic_list)
     return links
 
 pic = 'http://joyreactor.cc/'
